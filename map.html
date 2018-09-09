@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+  <meta name="theme-color" content="#000000" />
+
+  <title>Tu Centro Histórico &mdash; recuperando espacios </title>
+      <link rel="shortcut icon" href="images/logo.ico" />
+
+  <meta property="og:title" content="Tu Centro Histórico"/>
+  <meta property="og:image" content="images/mapa.jpg"/>
+  <meta property="og:url" content=""/>
+  <meta property="og:site_name" content=""/>
+  <meta property="og:description" content=""/>
+  <meta name="twitter:title" content="Tu Centro Histórico" />
+  <meta name="twitter:image" content="images/mapa.jpg" />
+  <meta name="twitter:url" content="" />
+  <meta name="twitter:card" content="" />
+  
+  </head>
+  <body>
+
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #floating-panel {
+        position: absolute;
+        top: 10px;
+        left: 25%;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+        text-align: center;
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        padding-left: 10px;
+      }
+      #floating-panel {
+        background-color: #fff;
+        border: 1px solid #999;
+        left: 25%;
+        padding: 5px;
+        position: absolute;
+        top: 10px;
+        z-index: 5;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="floating-panel">
+      <button onclick="toggleHeatmap()">Quitar marcas</button>
+      <button onclick="changeGradient()">Ver Gradiente</button>
+      <button onclick="changeRadius()">Ver radio</button>
+      <button onclick="changeOpacity()">Ver opacidad</button>
+    </div>
+    <div id="map"></div>
+    <script>
+
+      // This example requires the Visualization library. Include the libraries=visualization
+      // parameter when you first load the API. For example:
+      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=visualization">
+
+      var map, heatmap;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 19.25,
+          center: {lat: 19.4272247, lng:-99.1278146},
+          mapTypeId: 'roadmap'
+        });
+
+        heatmap = new google.maps.visualization.HeatmapLayer({
+          data: getPoints(),
+          map: map
+        });
+      }
+      function toggleHeatmap() {
+        heatmap.setMap(heatmap.getMap() ? null : map);
+      }
+
+      function changeGradient() {
+        var gradient = [
+          'rgba(0, 255, 255, 0)',
+          'rgba(0, 255, 255, 1)',
+          'rgba(0, 191, 255, 1)',
+          'rgba(0, 127, 255, 1)',
+          'rgba(0, 63, 255, 1)',
+          'rgba(0, 0, 255, 1)',
+          'rgba(0, 0, 223, 1)',
+          'rgba(0, 0, 191, 1)',
+          'rgba(0, 0, 159, 1)',
+          'rgba(0, 0, 127, 1)',
+          'rgba(63, 0, 91, 1)',
+          'rgba(127, 0, 63, 1)',
+          'rgba(191, 0, 31, 1)',
+          'rgba(255, 0, 0, 1)'
+        ]
+        heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
+      }
+
+      function changeRadius() {
+        heatmap.set('radius', heatmap.get('radius') ? null : 20);
+      }
+
+      function changeOpacity() {
+        heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
+      }
+
+      // Heatmap data: 200 Points
+      function getPoints() {
+        return [
+          new google.maps.LatLng(19.4277023,-99.1281392),
+          new google.maps.LatLng(19.4277173,-99.1284132),
+          new google.maps.LatLng(19.427884,-99.1281213),
+          new google.maps.LatLng(19.427504,-99.128533),
+          new google.maps.LatLng(19.427591,-99.127028),
+          new google.maps.LatLng(19.427096,-99.129046),
+          new google.maps.LatLng(19.427657,-99.1264),
+          new google.maps.LatLng(19.427236,-99.1254),
+          new google.maps.LatLng(19.427529,-99.128811),
+          new google.maps.LatLng(19.42733,-99.126214),
+          new google.maps.LatLng(19.427325,-99.126016),
+          new google.maps.LatLng(19.427295,-99.127618),
+          new google.maps.LatLng(19.427084,-99.12821),
+          new google.maps.LatLng(19.427476,-99.128184),
+          new google.maps.LatLng(19.42772,-99.128602),
+          new google.maps.LatLng(19.427671,-99.126256),
+          new google.maps.LatLng(19.427626,-99.127457),
+          new google.maps.LatLng(19.427501,-99.126437),
+          new google.maps.LatLng(19.427004,-99.128385),
+          new google.maps.LatLng(19.427151,-99.126168),
+          new google.maps.LatLng(19.427733,-99.127496),
+          new google.maps.LatLng(19.427467,-99.12867),
+          new google.maps.LatLng(19.427135,-99.126836),
+          new google.maps.LatLng(19.427237,-99.125734),
+          new google.maps.LatLng(19.427162,-99.12755),
+          new google.maps.LatLng(19.42749,-99.125766),
+          new google.maps.LatLng(19.427133,-99.127792),
+          new google.maps.LatLng(19.427673,-99.126728),
+          new google.maps.LatLng(19.427587,-99.128574),
+          new google.maps.LatLng(19.427618,-99.125634),
+          new google.maps.LatLng(19.427081,-99.128751),
+          new google.maps.LatLng(19.426945,-99.128941),
+          new google.maps.LatLng(19.427598,-99.127014),
+          new google.maps.LatLng(19.427414,-99.128244),
+          new google.maps.LatLng(19.427358,-99.126093),
+        ];
+      }
+    </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjf2V5EWt8KNiIOPlcEdRzHufANKnDGaI&libraries=visualization&callback=initMap">
+    </script>
+  </body>
+</html>
